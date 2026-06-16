@@ -117,9 +117,7 @@ else if (lowerText.startsWith("remember")) {
     reply = "Okay. I'll remember that.";
 }
 
-else if (
-    lowerText.includes("what do you remember")
-) {
+else if (lowerText.includes("what do you remember")) {
 
     if (memories.length === 0) {
 
@@ -127,25 +125,18 @@ else if (
 
     } else {
 
-        reply =
-            "I remember: " +
-            memories.join(". ");
+        reply = "I remember: " + memories.join(". ");
     }
 }
 
-else if (
-    lowerText.includes("forget everything")
-) {
+else if (lowerText.includes("forget everything")) {
 
     memories = [];
 
-    localStorage.removeItem(
-        "miraMemories"
-    );
+    localStorage.removeItem("miraMemories");
 
     reply = "All memories cleared.";
 }
-
 else {
 
     const commands = {
