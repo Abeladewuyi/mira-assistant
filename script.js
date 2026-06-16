@@ -1,6 +1,7 @@
 const orb = document.querySelector(".orb");
 const status = document.getElementById("status");
 let voices = [];
+let memories = JSON.parse(localStorage.getItem("miraMemories")) || [];
 
 speechSynthesis.onvoiceschanged = () => {
     voices = speechSynthesis.getVoices();
@@ -102,6 +103,48 @@ else if (lowerText.includes("tell me a joke")) {
 
     reply = jokes[Math.floor(Math.random() * jokes.length)];
 }
+else if (lowerText.startsWith("remember")) {
+
+    const memory = text.replace(/remember/i, "").trim();
+
+    memories.push(memory);
+
+    localStorage.setItem(
+        "miraMemories",
+        JSON.stringify(memories)
+    );
+
+    reply = "Okay. I'll remember that.";
+}
+
+else if (
+    lowerText.includes("what do you remember")
+) {
+
+    if (memories.length === 0) {
+
+        reply = "I don't remember anything yet.";
+
+    } else {
+
+        reply =
+            "I remember: " +
+            memories.join(". ");
+    }
+}
+
+else if (
+    lowerText.includes("forget everything")
+) {
+
+    memories = [];
+
+    localStorage.removeItem(
+        "miraMemories"
+    );
+
+    reply = "All memories cleared.";
+}
 
 else {
 
@@ -112,6 +155,8 @@ else {
         "hi": "Hello there!",
 
         "good morning": "Good morning. How was your night?",
+
+        "it was fine": "I'm glad to hear that. How can i help you today?",
 
         "good afternoon": "Good afternoon. Hope your day is going well.",
 
