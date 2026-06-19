@@ -1,7 +1,7 @@
 const orb = document.querySelector(".orb");
 const status = document.getElementById("status");
 let voices = [];
-let memories = JSON.parse(localStorage.getItem("miraMemories")) || [];
+let memories = JSON.parse(localStorage.getItem("miraMemories")) || {};
 
 speechSynthesis.onvoiceschanged = () => {
     voices = speechSynthesis.getVoices();
@@ -107,31 +107,57 @@ else if (lowerText.startsWith("remember")) {
 
     const memory = text.replace(/remember/i, "").trim();
 
-    memories.push(memory);
+    if (memory.includes(" is ")) {
 
-    localStorage.setItem(
-        "miraMemories",
-        JSON.stringify(memories)
-    );
+        const parts = memory.split(" is ");
 
-    reply = "Okay. I'll remember that.";
+        const key = parts[0].trim().toLowerCase();
+
+        const value = parts.slice(1).join(" is ").trim();
+
+        memories[key] = value;
+
+        localStorage.setItem(
+            "miraMemories",
+            JSON.stringify(memories)
+        );
+
+        reply = `Okay. I'll remember that ${key} is ${value}.`;
+
+    } else {
+
+        reply = "Please tell me something in the form of X is Y.";
+    }
 }
 
 else if (lowerText.includes("what do you remember")) {
 
-    if (memories.length === 0) {
+    const memoryList = Object.entries(memories)
+        .map(([key, value]) => `${key} is ${value}`)
+        .join(". ");
 
-        reply = "I don't remember anything yet.";
+    reply = memoryList
+        ? "I remember: " + memoryList
+        : "I don't remember anything yet.";
+}
 
-    } else {
+else if (lowerText.includes("what's my name") || lowerText.includes("what is my name")) {
 
-        reply = "I remember: " + memories.join(". ");
-    }
+    reply = memories["my name"]
+        ? `Your name is ${memories["my name"]}.`
+        : "I don't know your name yet.";
+}
+
+else if (lowerText.includes("what's my favorite anime") || lowerText.includes("what is my favorite anime")) {
+
+    reply = memories["my favorite anime"]
+        ? `Your favorite anime is ${memories["my favorite anime"]}.`
+        : "I don't know your favorite anime yet.";
 }
 
 else if (lowerText.includes("forget everything")) {
 
-    memories = [];
+    memories = {};
 
     localStorage.removeItem("miraMemories");
 
