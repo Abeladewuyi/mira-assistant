@@ -10,7 +10,27 @@ speechSynthesis.onvoiceschanged = () => {
 };
 
 const button = document.getElementById("listenBtn");
-const output = document.getElementById("output");
+const chatHistory = document.getElementById("chat-history");
+const toggleChat = document.getElementById("toggleChat");
+toggleChat.addEventListener("click", () => {
+
+    if (
+        chatHistory.style.display === "none"
+    ) {
+
+        chatHistory.style.display = "block";
+
+        toggleChat.textContent =
+            "Hide Chat History";
+
+    } else {
+
+        chatHistory.style.display = "none";
+
+        toggleChat.textContent =
+            "Show Chat History";
+    }
+});
 
 const recognition = new webkitSpeechRecognition();
 
@@ -27,9 +47,14 @@ recognition.onresult = (event) => {
 
     orb.classList.remove("wave");
 
-    const text = event.results[0][0].transcript;
+   const text = event.results[0][0].transcript;
 
-    output.textContent = text;
+chatHistory.innerHTML += `
+<div class="user-message">
+    <strong>You:</strong> ${text}
+</div>
+`;
+
 const lowerText = text.toLowerCase();
 
 let reply = "";
@@ -307,6 +332,14 @@ if (femaleVoice) {
     speech.pitch = 1.2;
 
     setTimeout(() => {
+        chatHistory.innerHTML += `
+<div class="mira-message">
+    <strong>Mira:</strong> ${reply}
+</div>
+`;
+
+chatHistory.scrollTop = chatHistory.scrollHeight;
     speechSynthesis.speak(speech);
+    
 }, 500);
 };

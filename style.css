@@ -221,6 +221,61 @@ button:hover{
     }
 
 }
+#chat-history {
+    width: 90%;
+    max-width: 500px;
+    min-height: 50px;
+    max-height: 250px;
+
+    overflow-y: auto;
+
+    margin-top: 20px;
+
+    padding: 10px;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.05);
+
+    backdrop-filter: blur(10px);
+
+    transition: all 0.3s ease;
+}
+
+.user-message {
+    background: rgba(0,212,255,0.15);
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px 0;
+}
+
+
+.user-message strong {
+    color: #00d4ff;
+}
+
+.mira-message {
+    background: rgba(255,255,255,0.08);
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px 0;
+}
+.mira-message strong {
+    color: #00d4ff;
+}
+#toggleChat {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+    background: rgba(0,212,255,0.2);
+
+    color: white;
+
+    backdrop-filter: blur(10px);
+}
 
 .wave::before{
     content:"";
