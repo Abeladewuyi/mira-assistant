@@ -2,6 +2,7 @@ const orb = document.querySelector(".orb");
 const status = document.getElementById("status");
 let voices = [];
 let memories = JSON.parse(localStorage.getItem("miraMemories")) || {};
+let reminders = JSON.parse(localStorage.getItem("miraReminders")) || [];
 
 speechSynthesis.onvoiceschanged = () => {
     voices = speechSynthesis.getVoices();
@@ -162,6 +163,45 @@ else if (lowerText.includes("forget everything")) {
     localStorage.removeItem("miraMemories");
 
     reply = "All memories cleared.";
+}
+else if (lowerText.startsWith("set a reminder")) {
+
+    const reminder = text
+        .replace(/set a reminder to/i, "")
+        .trim();
+
+    reminders.push(reminder);
+
+    localStorage.setItem(
+        "miraReminders",
+        JSON.stringify(reminders)
+    );
+
+    reply = `Okay. I'll remind you to ${reminder}.`;
+}
+
+else if (
+    lowerText.includes("what did i ask you to remind me about") ||
+    lowerText.includes("what should you remind me of") ||
+    lowerText.includes("do i have any reminders") ||
+    lowerText.includes("what reminders do i have") ||
+    lowerText.includes("what did i tell you to remind me about")
+) {
+
+    reply = reminders.length
+        ? "You asked me to remind you about: " + reminders.join(". ")
+        : "You don't have any reminders.";
+}
+
+else if (
+    lowerText.includes("clear reminders")
+) {
+
+    reminders = [];
+
+    localStorage.removeItem("miraReminders");
+
+    reply = "All reminders cleared.";
 }
 else {
 
