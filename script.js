@@ -3,6 +3,7 @@ const status = document.getElementById("status");
 let voices = [];
 let memories = JSON.parse(localStorage.getItem("miraMemories")) || {};
 let reminders = JSON.parse(localStorage.getItem("miraReminders")) || [];
+Notification.requestPermission();
 
 speechSynthesis.onvoiceschanged = () => {
     voices = speechSynthesis.getVoices();
@@ -167,19 +168,7 @@ else if (lowerText.includes("what do you remember")) {
         : "I don't remember anything yet.";
 }
 
-else if (lowerText.includes("what's my name") || lowerText.includes("what is my name")) {
 
-    reply = memories["my name"]
-        ? `Your name is ${memories["my name"]}.`
-        : "I don't know your name yet.";
-}
-
-else if (lowerText.includes("what's my favorite anime") || lowerText.includes("what is my favorite anime")) {
-
-    reply = memories["my favorite anime"]
-        ? `Your favorite anime is ${memories["my favorite anime"]}.`
-        : "I don't know your favorite anime yet.";
-}
 
 else if (lowerText.includes("forget everything")) {
 
@@ -188,6 +177,45 @@ else if (lowerText.includes("forget everything")) {
     localStorage.removeItem("miraMemories");
 
     reply = "All memories cleared.";
+}
+else if (
+    lowerText.startsWith("remind me to") &&
+    lowerText.includes("in")
+) {
+
+    const match = text.match(
+        /remind me to (.*) in (\d+) seconds/i
+    );
+
+    if (match) {
+
+        const task = match[1];
+
+        const seconds = parseInt(match[2]);
+
+        reply =
+            `Okay. I'll remind you to ${task} in ${seconds} seconds.`;
+
+        setTimeout(() => {
+
+            const reminderSpeech =
+                new SpeechSynthesisUtterance(
+                    `Reminder. ${task}`
+                );
+
+            speechSynthesis.speak(
+                reminderSpeech
+            );
+
+            new Notification(
+                "Mira Reminder",
+                {
+                    body: task
+                }
+            );
+
+        }, seconds * 1000);
+    }
 }
 else if (lowerText.startsWith("set a reminder")) {
 
@@ -227,6 +255,28 @@ else if (
     localStorage.removeItem("miraReminders");
 
     reply = "All reminders cleared.";
+}
+else if (
+    lowerText.startsWith("what is my ") ||
+    lowerText.startsWith("what's my ")
+) {
+
+    let key = lowerText
+        .replace("what is my ", "")
+        .replace("what's my ", "")
+        .replace("?", "")
+        .trim();
+
+    key = "my " + key;
+
+    if (memories[key]) {
+
+        reply = `Your ${key.replace("my ", "")} is ${memories[key]}.`;
+
+    } else {
+
+        reply = `I don't know your ${key.replace("my ", "")} yet.`;
+    }
 }
 else {
 
