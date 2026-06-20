@@ -8,7 +8,17 @@
     <title>Mira Assistant</title>
 </head>
 <body>
- <body>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mira Assistant</title>
+</head>
+
+<body>
 
 <div class="orb-container">
 
@@ -20,13 +30,18 @@
 
     <p id="status">Ready</p>
 
-    <p id="output">
-        Waiting for command...
-    </p>
+   <button id="toggleChat">
+    Show Chat History
+</button>
+
+<div id="chat-history" style="display:none;"></div>
 
 </div>
 
+<script src="script.js"></script>
+
 </body>
+</html>
 
     <script src="script.js"></script>
 </body>

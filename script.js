@@ -3,6 +3,7 @@ const status = document.getElementById("status");
 let voices = [];
 let memories = JSON.parse(localStorage.getItem("miraMemories")) || {};
 let reminders = JSON.parse(localStorage.getItem("miraReminders")) || [];
+Notification.requestPermission();
 
 speechSynthesis.onvoiceschanged = () => {
     voices = speechSynthesis.getVoices();
@@ -10,7 +11,27 @@ speechSynthesis.onvoiceschanged = () => {
 };
 
 const button = document.getElementById("listenBtn");
-const output = document.getElementById("output");
+const chatHistory = document.getElementById("chat-history");
+const toggleChat = document.getElementById("toggleChat");
+toggleChat.addEventListener("click", () => {
+
+    if (
+        chatHistory.style.display === "none"
+    ) {
+
+        chatHistory.style.display = "block";
+
+        toggleChat.textContent =
+            "Hide Chat History";
+
+    } else {
+
+        chatHistory.style.display = "none";
+
+        toggleChat.textContent =
+            "Show Chat History";
+    }
+});
 
 const recognition = new webkitSpeechRecognition();
 
@@ -27,9 +48,14 @@ recognition.onresult = (event) => {
 
     orb.classList.remove("wave");
 
-    const text = event.results[0][0].transcript;
+   const text = event.results[0][0].transcript;
 
-    output.textContent = text;
+chatHistory.innerHTML += `
+<div class="user-message">
+    <strong>You:</strong> ${text}
+</div>
+`;
+
 const lowerText = text.toLowerCase();
 
 let reply = "";
@@ -142,19 +168,7 @@ else if (lowerText.includes("what do you remember")) {
         : "I don't remember anything yet.";
 }
 
-else if (lowerText.includes("what's my name") || lowerText.includes("what is my name")) {
 
-    reply = memories["my name"]
-        ? `Your name is ${memories["my name"]}.`
-        : "I don't know your name yet.";
-}
-
-else if (lowerText.includes("what's my favorite anime") || lowerText.includes("what is my favorite anime")) {
-
-    reply = memories["my favorite anime"]
-        ? `Your favorite anime is ${memories["my favorite anime"]}.`
-        : "I don't know your favorite anime yet.";
-}
 
 else if (lowerText.includes("forget everything")) {
 
@@ -163,6 +177,45 @@ else if (lowerText.includes("forget everything")) {
     localStorage.removeItem("miraMemories");
 
     reply = "All memories cleared.";
+}
+else if (
+    lowerText.startsWith("remind me to") &&
+    lowerText.includes("in")
+) {
+
+    const match = text.match(
+        /remind me to (.*) in (\d+) seconds/i
+    );
+
+    if (match) {
+
+        const task = match[1];
+
+        const seconds = parseInt(match[2]);
+
+        reply =
+            `Okay. I'll remind you to ${task} in ${seconds} seconds.`;
+
+        setTimeout(() => {
+
+            const reminderSpeech =
+                new SpeechSynthesisUtterance(
+                    `Reminder. ${task}`
+                );
+
+            speechSynthesis.speak(
+                reminderSpeech
+            );
+
+            new Notification(
+                "Mira Reminder",
+                {
+                    body: task
+                }
+            );
+
+        }, seconds * 1000);
+    }
 }
 else if (lowerText.startsWith("set a reminder")) {
 
@@ -202,6 +255,28 @@ else if (
     localStorage.removeItem("miraReminders");
 
     reply = "All reminders cleared.";
+}
+else if (
+    lowerText.startsWith("what is my ") ||
+    lowerText.startsWith("what's my ")
+) {
+
+    let key = lowerText
+        .replace("what is my ", "")
+        .replace("what's my ", "")
+        .replace("?", "")
+        .trim();
+
+    key = "my " + key;
+
+    if (memories[key]) {
+
+        reply = `Your ${key.replace("my ", "")} is ${memories[key]}.`;
+
+    } else {
+
+        reply = `I don't know your ${key.replace("my ", "")} yet.`;
+    }
 }
 else {
 
@@ -307,6 +382,14 @@ if (femaleVoice) {
     speech.pitch = 1.2;
 
     setTimeout(() => {
+        chatHistory.innerHTML += `
+<div class="mira-message">
+    <strong>Mira:</strong> ${reply}
+</div>
+`;
+
+chatHistory.scrollTop = chatHistory.scrollHeight;
     speechSynthesis.speak(speech);
+    
 }, 500);
 };
