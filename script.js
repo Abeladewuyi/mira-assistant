@@ -393,3 +393,20 @@ chatHistory.scrollTop = chatHistory.scrollHeight;
     
 }, 500);
 };
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker
+        .register("./service-worker.js")
+        .then(() => {
+
+            console.log(
+                "Mira Service Worker Registered"
+            );
+
+        })
+        .catch((error) => {
+
+            console.log(error);
+
+        });
+}
