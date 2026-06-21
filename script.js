@@ -4,6 +4,9 @@ let voices = [];
 let memories = JSON.parse(localStorage.getItem("miraMemories")) || {};
 let reminders = JSON.parse(localStorage.getItem("miraReminders")) || [];
 Notification.requestPermission();
+let deferredPrompt;
+const installBtn =
+    document.getElementById("installBtn");
 
 speechSynthesis.onvoiceschanged = () => {
     voices = speechSynthesis.getVoices();
@@ -410,3 +413,36 @@ if ("serviceWorker" in navigator) {
 
         });
 }
+window.addEventListener(
+    "beforeinstallprompt",
+    (e) => {
+
+        e.preventDefault();
+
+        deferredPrompt = e;
+
+        installBtn.style.display =
+            "block";
+    }
+);
+installBtn.addEventListener(
+    "click",
+    async () => {
+
+        if (!deferredPrompt) return;
+
+        deferredPrompt.prompt();
+
+        const result =
+            await deferredPrompt.userChoice;
+
+        console.log(
+            result.outcome
+        );
+
+        deferredPrompt = null;
+
+        installBtn.style.display =
+            "none";
+    }
+);

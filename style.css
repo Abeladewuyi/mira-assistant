@@ -105,6 +105,18 @@ breathe 3s ease-in-out infinite;
     0 0 20px #67e8f9,
     0 0 40px #22d3ee;
 }
+#installBtn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+    background: #00D4FF;
+    color: #050816;
+
+    font-weight: bold;
+}
 
 #status{
     margin-top:70px;
