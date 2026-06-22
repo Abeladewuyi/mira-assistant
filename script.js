@@ -54,6 +54,16 @@ signUpBtn.addEventListener(
 
             const user =
                 result.user;
+                db.collection("users")
+  .doc(user.uid)
+  .set(
+    {
+      name: user.displayName,
+      email: user.email,
+      photo: user.photoURL
+    },
+    { merge: true }
+  );
 
             alert(
                 `Welcome ${user.displayName}`
