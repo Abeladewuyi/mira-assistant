@@ -42,6 +42,72 @@ const guestBtn =
             "block";
     }
 );
+const signUpBtn =
+    document.getElementById("signUpBtn");
+signUpBtn.addEventListener(
+    "click",
+    () => {
+
+        auth.signInWithPopup(provider)
+
+        .then((result) => {
+
+            const user =
+                result.user;
+
+            alert(
+                `Welcome ${user.displayName}`
+            );
+
+            welcomeScreen.style.display =
+                "none";
+
+            orbContainer.style.display =
+                "block";
+
+        })
+
+        .catch((error) => {
+
+            console.log(error);
+
+        });
+    }
+);
+
+const loginBtn =
+    document.getElementById("loginBtn");
+ loginBtn.addEventListener(
+    "click",
+    () => {
+
+        auth.signInWithPopup(provider)
+
+        .then((result) => {
+
+            const user =
+                result.user;
+
+            alert(
+                `Welcome back ${user.displayName}`
+            );
+
+            welcomeScreen.style.display =
+                "none";
+
+            orbContainer.style.display =
+                "block";
+
+        })
+
+        .catch((error) => {
+
+            console.log(error);
+
+        });
+    }
+
+);
 
 const button = document.getElementById("listenBtn");
 const chatHistory = document.getElementById("chat-history");
