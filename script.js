@@ -396,20 +396,20 @@ else if (
         reply = `I don't know your ${key.replace("my ", "")} yet.`;
     }
 }
+const greetings = [
+    "hello",
+    "hi",
+    "hey",
+    "yo"
+];
+
 if (
-    containsAny(
-        lowerText,
-        [
-            "hello",
-            "hi",
-            "hey",
-            "yo"
-        ]
+    greetings.includes(
+        lowerText.trim()
     )
 ) {
 
-    reply =
-        "Hello Abel.";
+  reply = `Hello ${user.displayName}`;
 }
 else if (
 
