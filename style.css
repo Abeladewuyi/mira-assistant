@@ -117,6 +117,153 @@ breathe 3s ease-in-out infinite;
 
     font-weight: bold;
 }
+.welcome-logo{
+
+    width:160px;
+
+    height:160px;
+
+    margin-bottom:15px;
+
+    object-fit:contain;
+
+    animation:
+    float 4s ease-in-out infinite;
+
+    text-shadow:
+    0 0 8px rgba(255,255,255,.8);
+
+    filter:
+    drop-shadow(
+        0 0 30px
+        rgba(0,212,255,.6)
+    );
+}
+.welcome-screen h1{
+
+    font-size: 2.5rem;
+
+    margin-bottom: 15px;
+
+    letter-spacing: -1px;
+}
+.features{
+
+    color:#cbd5e1;
+
+    font-size:1.1rem;
+
+    margin-bottom: 8px;
+}
+#signUpBtn{
+
+    background:
+    linear-gradient(
+    135deg,
+    #06b6d4,
+    #3b82f6
+    );
+
+    color:white;
+
+    margin-top:35px;
+}
+
+#loginBtn{
+
+    background:
+    rgba(255,255,255,.05);
+
+    color:white;
+
+    border:1px solid
+    rgba(255,255,255,.12);
+
+    backdrop-filter:blur(10px);
+
+    margin-top:18px;
+}
+
+#guestBtn{
+
+    background:none;
+
+    color:#67e8f9;
+
+    font-weight:bold;
+
+    margin-top:18px;
+}
+.orb-container{
+
+    display:none;
+
+    text-align:center;
+}
+
+.subtitle{
+
+    color:#94a3b8;
+
+    font-size:.95rem;
+
+    margin-top:-10px;
+
+    margin-bottom:20px;
+}
+.welcome-screen {
+
+    display: flex;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #050816;
+
+    z-index: 9999;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.welcome-screen button {
+
+    width: 250px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+#googleLoginBtn {
+
+    background: #ffffff;
+
+    color: black;
+}
+
+#guestBtn {
+
+    background: #00D4FF;
+
+    color: #050816;
+}
 
 #status{
     margin-top:70px;

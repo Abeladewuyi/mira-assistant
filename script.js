@@ -5,6 +5,22 @@ let memories = JSON.parse(localStorage.getItem("miraMemories")) || {};
 let reminders = JSON.parse(localStorage.getItem("miraReminders")) || [];
 Notification.requestPermission();
 let deferredPrompt;
+function containsAny(
+    text,
+    phrases
+) {
+
+    return phrases.some(
+        phrase =>
+        text.includes(phrase)
+    );
+
+}
+const orbContainer =
+    document.querySelector(".orb-container");
+
+const welcomeScreen =
+    document.getElementById("welcomeScreen");
 const installBtn =
     document.getElementById("installBtn");
 
@@ -12,6 +28,20 @@ speechSynthesis.onvoiceschanged = () => {
     voices = speechSynthesis.getVoices();
     console.log("Voices loaded:", voices.map(v => v.name));
 };
+
+const guestBtn =
+    document.getElementById("guestBtn");
+    guestBtn.addEventListener(
+    "click",
+    () => {
+
+        welcomeScreen.style.display =
+            "none";
+
+        orbContainer.style.display =
+            "block";
+    }
+);
 
 const button = document.getElementById("listenBtn");
 const chatHistory = document.getElementById("chat-history");
@@ -36,9 +66,19 @@ toggleChat.addEventListener("click", () => {
     }
 });
 
+
 const recognition = new webkitSpeechRecognition();
 
 button.addEventListener("click", () => {
+
+    if (
+        welcomeScreen.style.display !== "none"
+    ) {
+
+        welcomeScreen.style.display = "flex";
+
+        return;
+    }
 
     status.textContent = "Listening...";
 
@@ -260,8 +300,17 @@ else if (
     reply = "All reminders cleared.";
 }
 else if (
-    lowerText.startsWith("what is my ") ||
-    lowerText.startsWith("what's my ")
+
+    lowerText.includes("what is my") ||
+
+    lowerText.includes("what's my") ||
+
+    lowerText.includes("tell me my") ||
+
+    lowerText.includes("remember my") ||
+
+    lowerText.includes("do you know my")
+
 ) {
 
     let key = lowerText
@@ -280,6 +329,45 @@ else if (
 
         reply = `I don't know your ${key.replace("my ", "")} yet.`;
     }
+}
+if (
+    containsAny(
+        lowerText,
+        [
+            "hello",
+            "hi",
+            "hey",
+            "yo"
+        ]
+    )
+) {
+
+    reply =
+        "Hello Abel.";
+}
+else if (
+
+    lowerText.includes("time") ||
+
+    lowerText.includes("what's the time") ||
+
+    lowerText.includes("what's time") ||
+
+    lowerText.includes("current time") ||
+
+    lowerText.includes("tell me the time")
+
+) {
+
+    reply =
+        "The time is " +
+        new Date().toLocaleTimeString(
+            [],
+            {
+                hour: "numeric",
+                minute: "2-digit"
+            }
+        );
 }
 else {
 
@@ -306,18 +394,6 @@ else {
         "who created you": "I was created by Abel.",
 
         "what can you do": "I can search Google, open websites, tell jokes and much more.",
-
-       "what's time": "The time is " + new Date().toLocaleTimeString([], {
-        hour: 'numeric',
-        minute: '2-digit'}),
-
-        "what is the time": "The time is " + new Date().toLocaleTimeString([], {
-        hour: 'numeric',
-        minute: '2-digit'}),
-
-        "what says the time": "The time is " + new Date().toLocaleTimeString([], {
-        hour: 'numeric',
-        minute: '2-digit'}),
 
         "date": "Today's date is " + new Date().toDateString(),
 
