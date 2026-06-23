@@ -54,16 +54,28 @@ signUpBtn.addEventListener(
 
             const user =
                 result.user;
-                db.collection("users")
+                window.currentUser = user;
+db.collection("users")
   .doc(user.uid)
   .set(
     {
       name: user.displayName,
       email: user.email,
-      photo: user.photoURL
+      photo: user.photoURL,
+      lastLogin: new Date()
     },
     { merge: true }
-  );
+  )
+  .then(() => {
+
+      console.log("User profile saved");
+
+  })
+  .catch((error) => {
+
+      console.error(error);
+
+  });
 
             alert(
                 `Welcome ${user.displayName}`
@@ -97,6 +109,28 @@ const loginBtn =
 
             const user =
                 result.user;
+                window.currentUser = user;
+                db.collection("users")
+  .doc(user.uid)
+  .set(
+    {
+      name: user.displayName,
+      email: user.email,
+      photo: user.photoURL,
+      lastLogin: new Date()
+    },
+    { merge: true }
+  )
+  .then(() => {
+
+      console.log("User profile saved");
+
+  })
+  .catch((error) => {
+
+      console.error(error);
+
+  });
 
             alert(
                 `Welcome back ${user.displayName}`
@@ -253,30 +287,57 @@ else if (lowerText.startsWith("remember")) {
 
     const memory = text.replace(/remember/i, "").trim();
 
-    if (memory.includes(" is ")) {
+if (memory.includes(" is ")) {
 
-        const parts = memory.split(" is ");
+    const parts = memory.split(" is ");
 
-        const key = parts[0].trim().toLowerCase();
+    const key = parts[0].trim().toLowerCase();
 
-        const value = parts.slice(1).join(" is ").trim();
+    const value = parts.slice(1).join(" is ").trim();
 
-        memories[key] = value;
+    memories[key] = value;
 
-        localStorage.setItem(
-            "miraMemories",
-            JSON.stringify(memories)
-        );
+    localStorage.setItem(
+        "miraMemories",
+        JSON.stringify(memories)
+    );
 
-        reply = `Okay. I'll remember that ${key} is ${value}.`;
+    if (window.currentUser) {
+
+        db.collection("users")
+          .doc(currentUser.uid)
+          .collection("memories")
+          .doc(key)
+          .set({
+              value: value,
+              updatedAt: new Date()
+          })
+
+          .then(() => {
+
+              console.log(
+                  "Memory saved to cloud"
+              );
+
+          })
+
+          .catch((error) => {
+
+              console.error(error);
+
+          });
+    }
+
+    reply =
+      `Okay. I'll remember that ${key} is ${value}.`;
+}
 
     } else {
 
         reply = "Please tell me something in the form of X is Y.";
     }
-}
 
-else if (lowerText.includes("what do you remember")) {
+if (lowerText.includes("what do you remember")) {
 
     const memoryList = Object.entries(memories)
         .map(([key, value]) => `${key} is ${value}`)
@@ -413,13 +474,23 @@ const greetings = [
     "yo"
 ];
 
-if (
+ if (
     greetings.includes(
         lowerText.trim()
     )
 ) {
 
-  reply = `Hello ${user.displayName}`;
+    if (window.currentUser) {
+
+        reply =
+            `Hello ${window.currentUser.displayName}`;
+
+    } 
+    
+    else {
+
+        reply = "Hello.";
+    }
 }
 else if (
 
