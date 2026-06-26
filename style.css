@@ -313,79 +313,287 @@ html, body {
    MAIN APP — ORB
    ═══════════════════════════════════════════ */
 
+/* ========================= */
+/* MAIN MIRA APP */
+/* ========================= */
+
 .orb-container {
+    position: fixed;
+    inset: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    gap: 20px;
+    align-items: center;
+    text-align: center;
+    padding: 40px 24px;
+    z-index: 2;
+    background:
+        radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.16), transparent 28%),
+        linear-gradient(135deg, #020617 0%, #050d1f 45%, #020617 100%);
+    overflow: hidden;
 }
 
-.orb {
-    width: 180px;
-    height: 180px;
+.orb-container::before,
+.orb-container::after {
+    content: '';
+    position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #0af, #006);
-    box-shadow:
-        0 0 40px rgba(0,180,255,0.5),
-        0 0 80px rgba(0,100,255,0.3),
-        inset 0 0 30px rgba(0,0,0,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+.orb-container::before {
+    width: 420px;
+    height: 420px;
+    top: -140px;
+    left: -120px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.16), transparent 70%);
+}
+
+.orb-container::after {
+    width: 360px;
+    height: 360px;
+    right: -90px;
+    bottom: -110px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.16), transparent 70%);
+}
+
+.app-title {
+    position: relative;
+    z-index: 2;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #f8fcff;
+    margin-bottom: 10px;
+    text-shadow: 0 0 24px rgba(103, 232, 249, 0.2);
+}
+
+.app-subtitle {
+    position: relative;
+    z-index: 2;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(193, 218, 245, 0.82);
+    margin-bottom: 28px;
+    max-width: 430px;
+}
+
+/* Orb */
+.orb {
+    width: min(280px, 72vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: relative;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    user-select: none;
+    background: radial-gradient(circle at 30% 30%, #67E8F9, #0EA5E9 45%, #0F172A 100%);
+    box-shadow:
+        0 0 45px rgba(0, 212, 255, 0.45),
+        0 0 110px rgba(0, 212, 255, 0.2);
+    animation: breathe 3s ease-in-out infinite, float 5s ease-in-out infinite;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .orb:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
     box-shadow:
-        0 0 60px rgba(0,200,255,0.7),
-        0 0 100px rgba(0,120,255,0.4),
-        inset 0 0 30px rgba(0,0,0,0.4);
+        0 0 60px rgba(0, 212, 255, 0.55),
+        0 0 140px rgba(0, 212, 255, 0.28);
 }
 
-.orb:active {
-    transform: scale(0.97);
+/* Orb Rings */
+.orb::before {
+    content: '';
+    position: absolute;
+    inset: -18px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 212, 255, 0.28);
+    animation: rotate 12s linear infinite;
 }
 
+.orb::after {
+    content: '';
+    position: absolute;
+    inset: -36px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0, 212, 255, 0.16);
+    animation: rotateReverse 18s linear infinite;
+}
+
+/* MIRA */
 .inner-orb {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 22px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(1.4rem, 2.2vw, 2rem);
     font-weight: 800;
-    color: #fff;
-    letter-spacing: 2px;
-    text-shadow: 0 0 12px rgba(0,220,255,0.8);
+    letter-spacing: 0.28em;
+    color: white;
+    text-shadow: 0 0 15px white, 0 0 35px #67E8F9;
 }
 
-/* Status text */
+/* Status */
 #status {
-    font-size: 14px;
-    color: rgba(160,200,240,0.7);
-    letter-spacing: 0.05em;
-    font-family: 'Inter', sans-serif;
+    position: relative;
+    z-index: 2;
+    margin-top: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    color: #bfefff;
+    font-size: 0.95rem;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(0, 212, 255, 0.14);
+    backdrop-filter: blur(16px);
 }
 
-/* Toggle chat button */
+#status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.8);
+}
+
+/* Chat Button */
 #toggleChat {
-    background: rgba(0,100,200,0.15);
-    border: 1px solid rgba(0,180,255,0.2);
-    color: rgba(160,200,240,0.8);
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-    transition: all 0.18s ease;
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+    background: rgba(8, 14, 29, 0.78);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 999px;
+    backdrop-filter: blur(18px);
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 #toggleChat:hover {
-    background: rgba(0,120,220,0.25);
-    border-color: rgba(0,200,255,0.35);
-    color: #fff;
+    transform: translateY(-2px);
+    border-color: rgba(0, 212, 255, 0.35);
+    box-shadow: 0 14px 35px rgba(0, 212, 255, 0.16);
 }
+
+/* Chat History */
+#chat-history {
+    position: relative;
+    z-index: 2;
+    margin-top: 24px;
+    width: min(560px, 90vw);
+    max-height: 280px;
+    overflow: auto;
+    border-radius: 20px;
+    background: rgba(7, 12, 24, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 18px 45px rgba(0, 0, 0, 0.28);
+    padding: 16px 18px;
+    font-size: 13px;
+    color: rgba(214, 228, 248, 0.82);
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+}
+
+#chat-history::-webkit-scrollbar {
+    width: 4px;
+}
+
+#chat-history::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#chat-history::-webkit-scrollbar-thumb {
+    background: rgba(0, 180, 255, 0.25);
+    border-radius: 4px;
+}
+
+/* Floating */
+
+@keyframes float{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+}
+
+/* Glow */
+
+@keyframes breathe{
+
+    0%,100%{
+
+        box-shadow:
+        0 0 40px #22D3EE,
+        0 0 90px rgba(34,211,238,.6);
+
+    }
+
+    50%{
+
+        box-shadow:
+        0 0 60px #22D3EE,
+        0 0 130px rgba(34,211,238,.9);
+
+    }
+
+}
+
+/* Ring Rotation */
+
+@keyframes rotate{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+@keyframes rotateReverse{
+
+    from{
+
+        transform:rotate(360deg);
+
+    }
+
+    to{
+
+        transform:rotate(0deg);
+
+    }
+
+}
+
+/* Status text */
 
 /* Chat history panel */
 #chat-history {
