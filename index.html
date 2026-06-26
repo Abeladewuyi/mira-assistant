@@ -1,5 +1,4 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
@@ -9,72 +8,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mira Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <div class="orb-container">
-
     <div class="orb" id="listenBtn">
-        <div class="inner-orb">
-            MIRA
-        </div>
+        <div class="inner-orb">MIRA</div>
     </div>
-
     <p id="status">Ready</p>
-
-   <button id="toggleChat">
-    Show Chat History
-</button>
-
-<div id="chat-history" style="display:none;"></div>
-
+    <button id="toggleChat">Show Chat History</button>
+    <div id="chat-history" style="display:none;"></div>
 </div>
+
 <div id="welcomeScreen" class="welcome-screen">
+    <div class="welcome-card">
 
-<img
-    src="welcome-logo.png"
-    alt="Mira Logo"
-    class="welcome-logo"
-/>
+        <div class="welcome-logo-wrap">
+            <div class="welcome-logo-circle">
+                <img
+                    src="icon-192.png"
+                    alt="Mira Logo"
+                    class="welcome-logo"
+                />
+            </div>
+            <div class="welcome-logo-dot"></div>
+        </div>
 
-<h1>Welcome to Mira</h1>
+        <h1>Welcome to Mira</h1>
+        <p class="subtitle">Your intelligent voice assistant</p>
 
-<p class="features">
-    Voice • Memory • Reminders
-</p>
+        <div class="features">
+            <span class="welcome-feat">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></svg>
+                Voice
+            </span>
+            <span class="welcome-feat-divider"></span>
+            <span class="welcome-feat">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3L9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3L14.5 2Z"/></svg>
+                Memory
+            </span>
+            <span class="welcome-feat-divider"></span>
+            <span class="welcome-feat">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                Reminders
+            </span>
+        </div>
 
-<p class="subtitle">
-    Your personal AI assistant
-</p>
-<button id="signUpBtn">
-    Sign Up
-</button>
+        <button id="signUpBtn">
+            <svg class="g-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Sign Up
+        </button>
 
-<button id="loginBtn">
-    Log In
-</button>
+        <button id="loginBtn">
+            <svg class="g-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Log In
+        </button>
 
-<button id="guestBtn">
-    Try Mira as Guest
-</button>
+        <div class="welcome-separator">or</div>
 
+        <button id="guestBtn">
+            <svg class="person-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            Try Mira as Guest
+        </button>
+
+        <div class="welcome-terms">
+            By continuing, you agree to our<br>
+            <a href="your-terms-url-here" target="_blank">Terms of Service</a> and <a href="your-privacy-url-here" target="_blank">Privacy Policy</a>
+        </div>
+
+        <div class="welcome-security">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+            </svg>
+            Your data is encrypted and always protected
+        </div>
+
+    </div>
 </div>
+
 <button id="installBtn" style="display:none;">
     📱 Install Mira
 </button>
 
-</body>
-</html>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
 <script src="firebase.js"></script>
-
 <script src="script.js"></script>
+
 </body>
 </html>
