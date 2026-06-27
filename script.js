@@ -39,7 +39,7 @@ const guestBtn =
             "none";
 
         orbContainer.style.display =
-            "block";
+            "flex";
     }
 );
 const signUpBtn =
@@ -85,7 +85,7 @@ db.collection("users")
                 "none";
 
             orbContainer.style.display =
-                "block";
+                "flex";
 
         })
 
@@ -140,7 +140,7 @@ const loginBtn =
                 "none";
 
             orbContainer.style.display =
-                "block";
+                "flex";
 
         })
 
@@ -162,7 +162,7 @@ toggleChat.addEventListener("click", () => {
         chatHistory.style.display === "none"
     ) {
 
-        chatHistory.style.display = "block";
+        chatHistory.style.display = "flex";
 
         toggleChat.textContent =
             "Hide Chat History";

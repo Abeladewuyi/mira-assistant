@@ -1,8 +1,10 @@
 /* ═══════════════════════════════════════════
    MIRA ASSISTANT — style.css
    ═══════════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap');
-/* ── Global Reset ── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap');
+
+/* ── Reset ── */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -35,7 +37,6 @@ html, body {
     overflow: hidden;
 }
 
-/* Ambient glow — left */
 .welcome-screen::before {
     content: '';
     position: absolute;
@@ -49,7 +50,6 @@ html, body {
     pointer-events: none;
 }
 
-/* Ambient glow — right */
 .welcome-screen::after {
     content: '';
     position: absolute;
@@ -63,7 +63,6 @@ html, body {
     pointer-events: none;
 }
 
-/* Glass card */
 .welcome-card {
     position: relative;
     z-index: 2;
@@ -82,7 +81,6 @@ html, body {
     text-align: center;
 }
 
-/* ── Logo ── */
 .welcome-logo-wrap {
     display: inline-flex;
     align-items: center;
@@ -98,16 +96,13 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .welcome-logo-circle img.welcome-logo {
     width: 100px;
     height: 100px;
     object-fit: contain;
-    margin: 0;
     border-radius: 50%;
-    background: none;
     box-shadow: 0 0 24px rgba(0,200,255,0.45), 0 0 48px rgba(0,150,255,0.2);
 }
 
@@ -123,7 +118,6 @@ html, body {
     border: 2px solid #020818;
 }
 
-/* ── Heading & subtitle ── */
 .welcome-screen h1 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 28px;
@@ -137,10 +131,8 @@ html, body {
     font-size: 14px;
     color: rgba(160,185,220,0.75);
     margin: 0 0 22px;
-    font-family: 'Inter', sans-serif;
 }
 
-/* ── Feature row ── */
 .welcome-screen .features {
     display: flex;
     align-items: center;
@@ -161,13 +153,9 @@ html, body {
     font-weight: 500;
     flex: 1;
     justify-content: center;
-    font-family: 'Inter', sans-serif;
 }
 
-.welcome-feat svg {
-    opacity: 0.75;
-    flex-shrink: 0;
-}
+.welcome-feat svg { opacity: 0.75; flex-shrink: 0; }
 
 .welcome-feat-divider {
     width: 1px;
@@ -176,10 +164,7 @@ html, body {
     flex-shrink: 0;
 }
 
-/* ── Buttons ── */
-#signUpBtn,
-#loginBtn,
-#guestBtn {
+#signUpBtn, #loginBtn, #guestBtn {
     all: unset;
     display: flex;
     align-items: center;
@@ -197,7 +182,6 @@ html, body {
     box-sizing: border-box;
 }
 
-/* Sign Up — cyan-to-blue gradient */
 #signUpBtn {
     background: linear-gradient(90deg, #00C2FF 0%, #0070F3 100%);
     color: #fff;
@@ -209,7 +193,6 @@ html, body {
     transform: translateY(-1px);
 }
 
-/* Log In — dark glass */
 #loginBtn {
     background: rgba(10,25,60,0.7);
     color: #e2eaf5;
@@ -222,7 +205,6 @@ html, body {
     transform: translateY(-1px);
 }
 
-/* Separator */
 .welcome-separator {
     display: flex;
     align-items: center;
@@ -230,7 +212,6 @@ html, body {
     margin: 2px 0 10px;
     color: rgba(100,130,160,0.5);
     font-size: 12px;
-    font-family: 'Inter', sans-serif;
 }
 
 .welcome-separator::before,
@@ -241,7 +222,6 @@ html, body {
     background: rgba(0,180,255,0.12);
 }
 
-/* Guest button */
 #guestBtn {
     background: rgba(10,25,60,0.5);
     color: #c5d8f0;
@@ -255,27 +235,14 @@ html, body {
     transform: translateY(-1px);
 }
 
-/* Button icons */
-.g-icon {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-}
+.g-icon { width: 20px; height: 20px; flex-shrink: 0; }
+.person-icon { width: 20px; height: 20px; flex-shrink: 0; opacity: 0.7; }
 
-.person-icon {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    opacity: 0.7;
-}
-
-/* ── Terms ── */
 .welcome-terms {
     margin-top: 18px;
     font-size: 12px;
     color: rgba(120,150,185,0.6);
     line-height: 1.6;
-    font-family: 'Inter', sans-serif;
 }
 
 .welcome-terms a {
@@ -289,7 +256,6 @@ html, body {
     text-decoration: underline;
 }
 
-/* ── Security badge ── */
 .welcome-security {
     margin-top: 18px;
     padding-top: 16px;
@@ -300,7 +266,6 @@ html, body {
     gap: 7px;
     font-size: 11.5px;
     color: rgba(100,140,180,0.55);
-    font-family: 'Inter', sans-serif;
 }
 
 .welcome-security svg {
@@ -310,130 +275,132 @@ html, body {
 }
 
 /* ═══════════════════════════════════════════
-   MAIN APP — ORB
+   MAIN APP — ORB SCREEN
    ═══════════════════════════════════════════ */
 
-/* ========================= */
-/* MAIN MIRA APP */
-/* ========================= */
+.orb-container{
 
+    position:fixed;
 
+    inset:0;
 
+    width:100%;
 
+    height:100vh;
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:22px;
+
+    text-align:center;
+
+    padding:40px;
+
+    background:
+    radial-gradient(
+        ellipse at center,
+        #0a2a4a 0%,
+        #020d1f 75%
+    );
+
+    overflow:hidden;
 }
 
+.orb-container::before{
 
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    position:absolute;
 
-.orb-container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    background: radial-gradient(ellipse 80% 60% at 50% 40%, #0a2a4a 0%, #020d1f 70%);
-    position: relative;
-}
+    width:650px;
+    height:650px;
 
-.orb-container::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(0,200,255,0.12) 0%, transparent 70%);
-    pointer-events: none;
-}
+    left:50%;
+    top:50%;
 
-.app-title {
-  font-size: 28px;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.02em;
-  text-align: center;
-  margin-bottom: 6px;
-  line-height: 1.1;
-  position: relative;
-  z-index: 1;
-}
+    transform:translate(-50%,-50%);
 
-.app-subtitle {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  color: rgba(180, 220, 245, 0.75);
-  text-align: center;
-  position: relative;
-  z-index: 1;
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(0,212,255,.12),
+        transparent 70%
+    );
+
+    pointer-events:none;
 }
 
 .orb {
-    width: 300px;
-    height: 300px;
+    width: 290px;
+    height: 290px;
     border-radius: 50%;
-    border: 1.5px dashed rgba(0, 200, 255, 0.25);
+    border: 1.5px dashed rgba(0, 200, 255, 0.28);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     position: relative;
     transition: transform 0.2s ease;
+    flex-shrink: 0;
 }
 
-.orb:hover {
-    transform: scale(1.03);
-}
-
-.orb:active {
-    transform: scale(0.97);
-}
+.orb:hover { transform: scale(1.03); }
+.orb:active { transform: scale(0.97); }
 
 .inner-orb {
-    width: 220px;
-    height: 220px;
+    width: 216px;
+    height: 216px;
     border-radius: 50%;
     background: radial-gradient(circle at 38% 32%, #00e5ff, #0099cc 40%, #006699 70%, #003366 100%);
     box-shadow:
         0 0 40px rgba(0, 220, 255, 0.7),
         0 0 80px rgba(0, 180, 255, 0.45),
         0 0 140px rgba(0, 150, 255, 0.2),
-        inset 0 0 30px rgba(255,255,255,0.08),
-        inset 0 -10px 40px rgba(0,0,0,0.3);
+        inset 0 0 28px rgba(255,255,255,0.08),
+        inset 0 -10px 36px rgba(0,0,0,0.3);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 28px;
-    font-weight: 800;
+    font-size: 26px;
+    font-weight: 900;
     color: #ffffff;
     letter-spacing: 4px;
-    text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(0,220,255,0.6);
+    text-shadow: 0 0 20px rgba(255,255,255,0.9), 0 0 40px rgba(0,220,255,0.7);
     transition: box-shadow 0.3s ease;
 }
 
 .orb.wave .inner-orb {
     animation: pulse 1s ease-in-out infinite;
 }
+.app-title{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.app-subtitle{
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #9EB6D8;
+    text-align: center;
+    margin-bottom: 40px;
+}
 
 @keyframes pulse {
     0%   { box-shadow: 0 0 40px rgba(0,220,255,0.7),  0 0 80px rgba(0,180,255,0.45),  0 0 140px rgba(0,150,255,0.2); }
-    50%  { box-shadow: 0 0 60px rgba(0,220,255,1),    0 0 120px rgba(0,180,255,0.7),   0 0 200px rgba(0,150,255,0.4); }
+    50%  { box-shadow: 0 0 70px rgba(0,220,255,1),    0 0 130px rgba(0,180,255,0.8),   0 0 220px rgba(0,150,255,0.4); }
     100% { box-shadow: 0 0 40px rgba(0,220,255,0.7),  0 0 80px rgba(0,180,255,0.45),  0 0 140px rgba(0,150,255,0.2); }
 }
 
@@ -491,17 +458,9 @@ html, body {
     border-radius: 4px;
 }
 
-.user-message {
-    margin-bottom: 10px;
-    color: rgba(200, 230, 255, 0.9);
-}
+.user-message { margin-bottom: 10px; color: rgba(200,230,255,0.9); }
+.mira-message { margin-bottom: 10px; color: #00D4FF; }
 
-.mira-message {
-    margin-bottom: 10px;
-    color: #00D4FF;
-}
-
-/* ── Install button ── */
 #installBtn {
     position: fixed;
     bottom: 24px;
@@ -530,21 +489,8 @@ html, body {
    ═══════════════════════════════════════════ */
 
 @media (max-width: 420px) {
-    .welcome-card {
-        padding: 36px 24px 28px;
-        border-radius: 22px;
-    }
-
-    .welcome-screen h1 {
-        font-size: 24px;
-    }
-
-    .orb {
-        width: 150px;
-        height: 150px;
-    }
-
-    .inner-orb {
-        font-size: 18px;
-    }
+    .welcome-card { padding: 36px 24px 28px; border-radius: 22px; }
+    .welcome-screen h1 { font-size: 24px; }
+    .orb { width: 240px; height: 240px; }
+    .inner-orb { width: 176px; height: 176px; font-size: 22px; }
 }
