@@ -299,6 +299,8 @@ console.log("Contains ' is '? ", memory.includes(" is "));
         const value = parts.slice(1).join(" is ").trim();
 
         memories[key] = value;
+        
+        console.log(memories);
 
         localStorage.setItem(
             "miraMemories",
