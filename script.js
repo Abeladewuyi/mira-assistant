@@ -284,6 +284,7 @@ else if (lowerText.includes("tell me a joke")) {
     reply = jokes[Math.floor(Math.random() * jokes.length)];
 }
 else if (lowerText.startsWith("remember")) {
+
     console.log("Remember block entered");
 console.log(text);
 
@@ -625,6 +626,88 @@ else {
     "what is 9 times 9": "9 times 9 is 81.",
     "what is 50 percent of 200": "50 percent of 200 is 100.",
 
+    // ── Sports ──
+    "what is football": "Football, also called soccer in some countries, is a sport played by two teams of 11 trying to score goals.",
+    "what is basketball": "Basketball is a sport where two teams try to score by shooting a ball through a hoop.",
+    "who is the goat": "That's debatable! Many say Michael Jordan, LeBron James, or Lionel Messi depending on the sport.",
+    "what is the world cup": "The World Cup is the biggest international football tournament, held every 4 years.",
+    "what is the olympics": "The Olympics is a global multi-sport event held every 4 years, featuring athletes from around the world.",
+    "what is tennis": "Tennis is a sport played between two players or two teams of two, hitting a ball over a net with rackets.",
+    "what is cricket": "Cricket is a bat-and-ball sport played between two teams of 11 players, popular in countries like India and England.",
+    "what is boxing": "Boxing is a combat sport where two people fight using only their fists, wearing padded gloves.",
+    "what is a marathon": "A marathon is a long-distance race covering 42.195 kilometres or 26.2 miles.",
+    "what is golf": "Golf is a sport where players try to hit a ball into a series of holes using as few strokes as possible.",
+
+    // ── History ──
+    "who was albert einstein": "Albert Einstein was a theoretical physicist who developed the theory of relativity.",
+    "who was isaac newton": "Isaac Newton was a physicist and mathematician famous for the laws of motion and gravity.",
+    "who was nelson mandela": "Nelson Mandela was a South African anti-apartheid leader who became the country's first Black president.",
+    "who was martin luther king": "Martin Luther King Jr. was a civil rights leader known for advocating nonviolent resistance against racial injustice.",
+    "who was abraham lincoln": "Abraham Lincoln was the 16th President of the United States, known for ending slavery.",
+    "what was world war 2": "World War 2 was a global conflict from 1939 to 1945, involving most of the world's nations.",
+    "what was the cold war": "The Cold War was a period of political tension between the United States and the Soviet Union from 1947 to 1991.",
+    "who built the pyramids": "The ancient Egyptians built the pyramids, primarily as tombs for pharaohs.",
+    "what is ancient rome": "Ancient Rome was a powerful civilization that lasted over a thousand years and shaped Western law, government, and architecture.",
+    "what is the renaissance": "The Renaissance was a period of cultural rebirth in Europe, spanning roughly the 14th to 17th centuries.",
+
+    // ── Languages ──
+    "how do you say hello in spanish": "Hola.",
+    "how do you say hello in french": "Bonjour.",
+    "how do you say hello in german": "Hallo.",
+    "how do you say hello in italian": "Ciao.",
+    "how do you say hello in japanese": "Konnichiwa.",
+    "how do you say thank you in spanish": "Gracias.",
+    "how do you say thank you in french": "Merci.",
+    "how do you say goodbye in spanish": "Adiós.",
+    "how many languages are there": "There are over 7,000 languages spoken in the world today.",
+    "what is the most spoken language": "Mandarin Chinese is the most spoken language by number of native speakers.",
+
+    // ── Animals ──
+    "what is the fastest animal": "The peregrine falcon is the fastest animal, reaching speeds over 240 mph while diving.",
+    "what is the largest animal": "The blue whale is the largest animal to have ever lived, reaching up to 30 metres long.",
+    "what is the smallest animal": "The bee hummingbird is the smallest bird, and certain mites are among the smallest animals overall.",
+    "what is the tallest animal": "The giraffe is the tallest living land animal, reaching up to 5.5 metres.",
+    "what is the smartest animal": "Besides humans, dolphins, chimpanzees, and elephants are considered among the smartest animals.",
+    "how long do dogs live": "Dogs typically live 10 to 13 years, depending on breed and size.",
+    "how long do cats live": "Cats typically live 12 to 18 years on average.",
+    "what do pandas eat": "Pandas mainly eat bamboo, consuming up to 38 kilograms a day.",
+    "can fish drown": "Fish can't drown in water, but they can suffocate if there isn't enough oxygen in the water.",
+    "do bees die after stinging": "Honeybees die after stinging because their stinger gets lodged in the skin and tears away from their body.",
+
+    // ── Space ──
+    "how many moons does earth have": "Earth has one moon.",
+    "how many moons does jupiter have": "Jupiter has 95 confirmed moons.",
+    "what is the largest planet": "Jupiter is the largest planet in our solar system.",
+    "what is the smallest planet": "Mercury is the smallest planet in our solar system.",
+    "how far is the moon": "The Moon is about 384,400 kilometres from Earth.",
+    "how far is the sun": "The Sun is about 150 million kilometres from Earth.",
+    "what is a light year": "A light year is the distance light travels in one year — about 9.46 trillion kilometres.",
+    "is there life on mars": "No confirmed life has been found on Mars, but scientists continue to search for signs of past microbial life.",
+    "what is a comet": "A comet is a small icy body that releases gas and dust as it gets close to the Sun, forming a glowing tail.",
+    "what is an asteroid": "An asteroid is a rocky object orbiting the Sun, smaller than a planet.",
+
+    // ── Random Useful Conversions ──
+    "how many kilometres in a mile": "1 mile is approximately 1.609 kilometres.",
+    "how many pounds in a kilogram": "1 kilogram is approximately 2.205 pounds.",
+    "how many inches in a foot": "There are 12 inches in a foot.",
+    "how many feet in a metre": "1 metre is approximately 3.281 feet.",
+    "how many ounces in a pound": "There are 16 ounces in a pound.",
+    "how many millilitres in a litre": "There are 1000 millilitres in a litre.",
+    "how many grams in a kilogram": "There are 1000 grams in a kilogram.",
+    "celsius to fahrenheit": "To convert Celsius to Fahrenheit, multiply by 9, divide by 5, then add 32.",
+    "fahrenheit to celsius": "To convert Fahrenheit to Celsius, subtract 32, then multiply by 5 and divide by 9.",
+
+    // ── Common Small Talk ──
+    "what's new": "Not much on my end! What's new with you?",
+    "long time no see": "It has been a while! Good to hear from you again.",
+    "miss me": "I'm always right here whenever you need me!",
+    "do you remember me": "I remember things you tell me to remember! Ask me what I remember.",
+    "are you busy right now": "Never too busy for you!",
+    "can we talk": "Of course! I'm all ears.",
+    "i need to vent": "Go ahead, I'm listening.",
+    "i just wanted to say hi": "Aw, that's sweet! Hi there.",
+    "nice to meet you": "Nice to meet you too!",
+    "pleasure to meet you": "The pleasure is all mine!",
     // ── Jokes ──
     "tell me a joke": "Why do programmers prefer dark mode? Because light attracts bugs!",
     "another joke": "I would tell you a UDP joke, but you might not get it.",
