@@ -285,62 +285,49 @@ else if (lowerText.includes("tell me a joke")) {
 }
 else if (lowerText.startsWith("remember")) {
 
-    console.log("Remember block entered");
-console.log(text);
-
     const memory = text.replace(/remember/i, "").trim();
 
-if (memory.includes(" is ")) {
+    console.log("Memory:", memory);
+console.log("Contains ' is '? ", memory.includes(" is "));
 
-    const parts = memory.split(" is ");
+    if (memory.includes(" is ")) {
 
-    const key = parts[0].trim().toLowerCase();
+        const parts = memory.split(" is ");
 
-    const value = parts.slice(1).join(" is ").trim();
+        const key = parts[0].trim().toLowerCase();
 
-    memories[key] = value;
+        const value = parts.slice(1).join(" is ").trim();
 
-    localStorage.setItem(
-        "miraMemories",
-        JSON.stringify(memories)
-    );
+        memories[key] = value;
 
-    if (window.currentUser) {
+        localStorage.setItem(
+            "miraMemories",
+            JSON.stringify(memories)
+        );
 
-        db.collection("users")
-          .doc(currentUser.uid)
-          .collection("memories")
-          .doc(key)
-          .set({
-              value: value,
-              updatedAt: new Date()
-          })
+        if (window.currentUser) {
 
-          .then(() => {
+            db.collection("users")
+              .doc(currentUser.uid)
+              .collection("memories")
+              .doc(key)
+              .set({
+                  value: value,
+                  updatedAt: new Date()
+              });
 
-              console.log(
-                  "Memory saved to cloud"
-              );
+        }
 
-          })
-
-          .catch((error) => {
-
-              console.error(error);
-
-          });
-    }
-
-    reply =
-      `Okay. I'll remember that ${key} is ${value}.`;
-}
+        reply = `Okay. I'll remember that ${key} is ${value}.`;
 
     } else {
 
         reply = "Please tell me something in the form of X is Y.";
-    }
 
-if (lowerText.includes("what do you remember")) {
+    }
+}
+
+else if (lowerText.includes("what do you remember")) {
 
     const memoryList = Object.entries(memories)
         .map(([key, value]) => `${key} is ${value}`)
