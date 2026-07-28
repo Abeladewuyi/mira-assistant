@@ -854,6 +854,8 @@ html, body {
 }
 
 #chat-history {
+    display: flex;
+    flex-direction: column;
     width: 90%;
     max-width: 520px;
     max-height: 260px;
@@ -861,14 +863,12 @@ html, body {
     background: rgba(0, 15, 40, 0.75);
     border: 1px solid rgba(0, 180, 255, 0.15);
     border-radius: 18px;
-    padding: 18px 20px;
-    font-size: 14px;
-    color: rgba(180, 220, 245, 0.9);
-    line-height: 1.7;
-    font-family: 'Inter', sans-serif;
+    padding: 16px 18px;
+    gap: 8px;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
 }
+
 
 #chat-history::-webkit-scrollbar { width: 4px; }
 #chat-history::-webkit-scrollbar-track { background: transparent; }
@@ -878,15 +878,16 @@ html, body {
 }
 
 /* ── Chat message fix ── */
+
+
 .user-message,
 .mira-message {
     display: block;
     width: 100%;
-    margin-bottom: 10px;
     padding: 8px 12px;
     border-radius: 10px;
     line-height: 1.6;
-    clear: both;
+    word-break: break-word;
 }
 
 .user-message {
