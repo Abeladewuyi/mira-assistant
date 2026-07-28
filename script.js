@@ -1,8 +1,7 @@
 const orb = document.querySelector(".orb");
 const status = document.getElementById("status");
 function onAppReady(userName) {
-    welcomeScreen.style.display = "none";
-    orbContainer.style.display = "flex";
+onAppReady(user.displayName);
 
     // ── ADD THIS LINE ──
     // ── Update sidebar with first name only ──
@@ -119,11 +118,7 @@ db.collection("users")
                 `Welcome ${user.displayName}`
             );
 
-            welcomeScreen.style.display =
-                "none";
-
-            orbContainer.style.display =
-                "flex";
+          onAppReady(user.displayName);
 
         })
 
@@ -174,11 +169,7 @@ const loginBtn =
                 `Welcome back ${user.displayName}`
             );
 
-            welcomeScreen.style.display =
-                "none";
-
-            orbContainer.style.display =
-                "flex";
+        onAppReady(user.displayName);
 
         })
 
