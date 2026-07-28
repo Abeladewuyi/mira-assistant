@@ -5,7 +5,6 @@ function onAppReady(userName) {
     orbContainer.style.display = "flex";
 
     // ── ADD THIS LINE ──
-    document.dispatchEvent(new CustomEvent('miraUserLoggedIn', { detail: { name: userName || 'Abel' } }));
     // ── Update sidebar with first name only ──
     const firstName = userName
         ? userName.split(" ")[0]
@@ -191,6 +190,11 @@ const loginBtn =
     }
 
 );
+const firstName = user.displayName.split(" ")[0];
+
+document.getElementById("sidebarName").textContent = firstName;
+document.getElementById("sidebarAvatar").textContent =
+    firstName.charAt(0).toUpperCase();
 
 const button = document.getElementById("listenBtn");
 const chatHistory = document.getElementById("chat-history");
