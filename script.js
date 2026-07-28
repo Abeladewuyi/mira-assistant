@@ -1,8 +1,33 @@
 const orb = document.querySelector(".orb");
 const status = document.getElementById("status");
+function onAppReady(userName) {
+    welcomeScreen.style.display = "none";
+    orbContainer.style.display = "flex";
+
+    // ── ADD THIS LINE ──
+    document.dispatchEvent(new CustomEvent('miraUserLoggedIn', { detail: { name: userName || 'Abel' } }));
+
+    // ... rest of your existing onAppReady code
+}
 let voices = [];
-let memories = JSON.parse(localStorage.getItem("miraMemories")) || {};
-let reminders = JSON.parse(localStorage.getItem("miraReminders")) || [];
+let conversationState = null;
+let memories = {};
+let reminders = [];
+
+try {
+    memories = JSON.parse(localStorage.getItem("miraMemories")) || {};
+} catch (error) {
+    console.error("Failed to load memories:", error);
+    memories = {};
+}
+
+try {
+    reminders = JSON.parse(localStorage.getItem("miraReminders")) || [];
+} catch (error) {
+    console.error("Failed to load reminders:", error);
+    reminders = [];
+}
+
 Notification.requestPermission();
 let deferredPrompt;
 function containsAny(
@@ -285,10 +310,9 @@ else if (lowerText.includes("tell me a joke")) {
 }
 else if (lowerText.startsWith("remember")) {
 
-    const memory = text.replace(/remember/i, "").trim();
-
-    console.log("Memory:", memory);
-console.log("Contains ' is '? ", memory.includes(" is "));
+    const memory = text
+        .replace(/^remember(?:\s+that)?\s+/i, "")
+        .trim();
 
     if (memory.includes(" is ")) {
 
@@ -300,22 +324,23 @@ console.log("Contains ' is '? ", memory.includes(" is "));
 
         memories[key] = value;
 
-        console.log(memories);
-
         localStorage.setItem(
             "miraMemories",
             JSON.stringify(memories)
         );
 
-        if (window.currentUser) {
+        if (window.currentUser?.uid) {
 
             db.collection("users")
-              .doc(currentUser.uid)
+              .doc(window.currentUser.uid)
               .collection("memories")
               .doc(key)
               .set({
                   value: value,
                   updatedAt: new Date()
+              })
+              .catch((error) => {
+                  console.error("Failed to save memory to Firestore:", error);
               });
 
         }
