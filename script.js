@@ -6,6 +6,20 @@ function onAppReady(userName) {
 
     // ── ADD THIS LINE ──
     document.dispatchEvent(new CustomEvent('miraUserLoggedIn', { detail: { name: userName || 'Abel' } }));
+    // ── Update sidebar with first name only ──
+    const firstName = userName
+        ? userName.split(" ")[0]
+        : "Guest";
+
+    const nameEl = document.getElementById("sidebarName");
+    const avatarEl = document.getElementById("sidebarAvatar");
+
+    if (nameEl) nameEl.textContent = firstName;
+    if (avatarEl) avatarEl.textContent = firstName.charAt(0).toUpperCase();
+
+    document.dispatchEvent(new CustomEvent('miraUserLoggedIn', {
+        detail: { name: firstName }
+    }));
 
     // ... rest of your existing onAppReady code
 }
