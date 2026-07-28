@@ -1,7 +1,8 @@
 const orb = document.querySelector(".orb");
 const status = document.getElementById("status");
 function onAppReady(userName) {
-onAppReady(user.displayName);
+    welcomeScreen.style.display = "none";
+    orbContainer.style.display = "flex";
 
     // ── ADD THIS LINE ──
     // ── Update sidebar with first name only ──
@@ -114,11 +115,9 @@ db.collection("users")
 
   });
 
-            alert(
-                `Welcome ${user.displayName}`
-            );
+alert(`Welcome ${user.displayName}`);
 
-          onAppReady(user.displayName);
+onAppReady(user.displayName);
 
         })
 
@@ -165,12 +164,9 @@ const loginBtn =
 
   });
 
-            alert(
-                `Welcome back ${user.displayName}`
-            );
+alert(`Welcome back ${user.displayName}`);
 
-        onAppReady(user.displayName);
-
+onAppReady(user.displayName);
         })
 
         .catch((error) => {
@@ -181,11 +177,6 @@ const loginBtn =
     }
 
 );
-const firstName = user.displayName.split(" ")[0];
-
-document.getElementById("sidebarName").textContent = firstName;
-document.getElementById("sidebarAvatar").textContent =
-    firstName.charAt(0).toUpperCase();
 
 const button = document.getElementById("listenBtn");
 const chatHistory = document.getElementById("chat-history");
